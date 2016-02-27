@@ -23,7 +23,7 @@ wstring PlusCover::GetCover(wstring FilePath)
 	if (!GenCover(FilePath))
 		if (!SearchCover(FilePath))
 			return wstring();
-	return m_TempPath;
+	return m_CoverPath;
 }
 
 unsigned int PlusCover::GenCover(wstring FilePath)
@@ -31,6 +31,7 @@ unsigned int PlusCover::GenCover(wstring FilePath)
 	TagLib::FileRef fr(FilePath.c_str(), false);
 	if (!fr.isNull() && CCover::GetEmbedded(fr, m_TempPath))
 	{
+		m_CoverPath = m_TempPath;
 		return m_TempPath.length();
 	}
 	else
@@ -43,5 +44,5 @@ unsigned int PlusCover::GenCover(wstring FilePath)
 bool PlusCover::SearchCover(wstring FilePath)
 {
 	wstring folder = FilePath.substr(0, FilePath.rfind(L"\\") + 1);
-	return CCover::GetLocal(L"cover", folder, m_TempPath);
+	return CCover::GetLocal(L"cover", folder, m_CoverPath);
 }
