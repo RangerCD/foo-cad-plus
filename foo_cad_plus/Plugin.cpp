@@ -37,7 +37,7 @@ const GUID ORDER_SHUFFLE_DIRECTORIES = { 0x83C37600, 0xD725, 0x4727, { 0xB5, 0x3
 
 DECLARE_COMPONENT_VERSION(
 	"CD Art Display Plus",
-	"1.1.0",
+	"1.1.1",
 	"? 2013 - Birunthan Mohanathas, 2015 - RangerCD");
 
 static initquit_factory_t<foo_cad> foo_interface;
@@ -183,20 +183,17 @@ void foo_cad::on_playback_new_track(metadb_handle_ptr track)
 			wstring str;
 			str.assign(p2, p1 - p2);
 
-			if (m_strFilePath != str)
+			m_strFilePath = str;
+			str = m_pCover->GetCover(str);
+
+			if (str.length() && _countof(buffer) >= len + str.length())
 			{
-				m_strFilePath = str;
-				str = m_pCover->GetCover(str);
+				index = 2;
+				while ((p1 = wcschr(p2, L'\t')) != nullptr && index--)p2 = p1 + 1;
 
-				if (str.length() && _countof(buffer) >= len + str.length())
-				{
-					index = 2;
-					while ((p1 = wcschr(p2, L'\t')) != nullptr && index--)p2 = p1 + 1;
-
-					wstring temp = str + p1;
-					wcscpy(p1, temp.c_str());
-					len += str.length();
-				}
+				wstring temp = str + p1;
+				wcscpy(p1, temp.c_str());
+				len += str.length();
 			}
 		}
 
