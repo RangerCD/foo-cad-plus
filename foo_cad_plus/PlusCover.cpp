@@ -44,5 +44,19 @@ unsigned int PlusCover::GenCover(wstring FilePath)
 bool PlusCover::SearchCover(wstring FilePath)
 {
 	wstring folder = FilePath.substr(0, FilePath.rfind(L"\\") + 1);
-	return CCover::GetLocal(L"cover", folder, m_CoverPath);
+	wstring parent_folder = folder + L"..\\";
+	return (
+		//Current Directory
+		CCover::GetLocal(L"cover", folder, m_CoverPath) ||
+		CCover::GetLocal(L"cover1", folder, m_CoverPath) ||
+		CCover::GetLocal(L"front", folder, m_CoverPath) ||
+		CCover::GetLocal(L"front1", folder, m_CoverPath) 
+		
+		||
+		//Parent Directory
+		CCover::GetLocal(L"cover", parent_folder, m_CoverPath) ||
+		CCover::GetLocal(L"cover1", parent_folder, m_CoverPath) ||
+		CCover::GetLocal(L"front", parent_folder, m_CoverPath) ||
+		CCover::GetLocal(L"front1", parent_folder, m_CoverPath)
+		);
 }

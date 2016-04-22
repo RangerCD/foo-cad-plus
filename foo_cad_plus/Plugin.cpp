@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright (C) 2012 Birunthan Mohanathas <http://poiru.net>
                 2015 RangerCD             <http://www.debug.moe>
 
@@ -37,8 +37,8 @@ const GUID ORDER_SHUFFLE_DIRECTORIES = { 0x83C37600, 0xD725, 0x4727, { 0xB5, 0x3
 
 DECLARE_COMPONENT_VERSION(
 	"CD Art Display Plus",
-	"1.1.1",
-	"? 2013 - Birunthan Mohanathas, 2015 - RangerCD");
+	"1.2.0",
+	"© 2013 - Birunthan Mohanathas, 2015 - RangerCD");
 
 static initquit_factory_t<foo_cad> foo_interface;
 
