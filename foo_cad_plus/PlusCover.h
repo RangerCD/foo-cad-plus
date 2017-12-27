@@ -17,7 +17,7 @@ public:
 
 private:
 	bool SearchCacheFile(const std::wstring & CacheName, std::wstring & CoverPath);
-	bool GenCover(const std::wstring & FilePath, const std::wstring & CoverPath);
+	bool GenCover(const std::wstring & FilePath, std::wstring & CoverPath);
 	bool SearchCover(const std::wstring & FilePath, std::wstring & CoverPath);
 
 	bool GetCacheName(const std::wstring & FilePath, std::wstring & CacheName);

@@ -1,5 +1,5 @@
 #include "PlusCover.h"
-#include "Cover.h"
+#include "FindCover.h"
 
 #include <sstream>
 #include <iomanip>
@@ -38,7 +38,7 @@ wstring PlusCover::GetCover(const wstring & FilePath)
 	wstring CoverPath;
 	if (GetCacheName(FilePath, CacheName))
 		if (!SearchCacheFile(CacheName, CoverPath))
-			if (!GenCover(FilePath, CoverPath = m_wstrTempDir + CacheName + L".jpg"))
+			if (!GenCover(FilePath, CoverPath = m_wstrTempDir + CacheName))
 				if (!SearchCover(FilePath, CoverPath))
 					return wstring();
 	return CoverPath;
@@ -46,13 +46,13 @@ wstring PlusCover::GetCover(const wstring & FilePath)
 
 bool PlusCover::SearchCacheFile(const std::wstring & CacheName, std::wstring & CoverPath)
 {
-	return CCover::GetLocal(CacheName, m_wstrTempDir, CoverPath);
+	return FindCover::GetLocal(CacheName, m_wstrTempDir, CoverPath);
 }
 
-bool PlusCover::GenCover(const wstring & FilePath, const std::wstring & CoverPath)
+bool PlusCover::GenCover(const wstring & FilePath, std::wstring & CoverPath)
 {
 	TagLib::FileRef fr(FilePath.c_str(), false);
-	if (!fr.isNull() && CCover::GetEmbedded(fr, CoverPath))
+	if (!fr.isNull() && FindCover::GetEmbedded(fr, CoverPath))
 	{
 		return true;
 	}
@@ -69,17 +69,17 @@ bool PlusCover::SearchCover(const wstring & FilePath, std::wstring & CoverPath)
 	wstring parent_folder = folder + L"..\\";
 	return (
 		//Current Directory
-		CCover::GetLocal(L"cover", folder, CoverPath) ||
-		CCover::GetLocal(L"cover1", folder, CoverPath) ||
-		CCover::GetLocal(L"front", folder, CoverPath) ||
-		CCover::GetLocal(L"front1", folder, CoverPath)
+		FindCover::GetLocal(L"cover", folder, CoverPath) ||
+		FindCover::GetLocal(L"cover1", folder, CoverPath) ||
+		FindCover::GetLocal(L"front", folder, CoverPath) ||
+		FindCover::GetLocal(L"front1", folder, CoverPath)
 		
 		||
 		//Parent Directory
-		CCover::GetLocal(L"cover", parent_folder, CoverPath) ||
-		CCover::GetLocal(L"cover1", parent_folder, CoverPath) ||
-		CCover::GetLocal(L"front", parent_folder, CoverPath) ||
-		CCover::GetLocal(L"front1", parent_folder, CoverPath)
+		FindCover::GetLocal(L"cover", parent_folder, CoverPath) ||
+		FindCover::GetLocal(L"cover1", parent_folder, CoverPath) ||
+		FindCover::GetLocal(L"front", parent_folder, CoverPath) ||
+		FindCover::GetLocal(L"front1", parent_folder, CoverPath)
 		);
 }
 

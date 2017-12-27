@@ -258,6 +258,9 @@
     <ClCompile Include="PlusCover.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FindCover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="taglib\ape\apefile.h">
@@ -516,6 +519,9 @@
       <Filter>Rainmeter\PluginNowPlaying</Filter>
     </ClInclude>
     <ClInclude Include="PlusCover.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FindCover.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

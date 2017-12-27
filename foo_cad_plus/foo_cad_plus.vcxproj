@@ -92,6 +92,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FindCover.cpp" />
     <ClCompile Include="Plugin.cpp" />
     <ClCompile Include="PlusCover.cpp" />
     <ClCompile Include="Rainmeter\PluginNowPlaying\Cover.cpp" />
@@ -173,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cad_sdk.h" />
+    <ClInclude Include="FindCover.h" />
     <ClInclude Include="Plugin.h" />
     <ClInclude Include="PlusCover.h" />
     <ClInclude Include="PlusMsg.h" />
