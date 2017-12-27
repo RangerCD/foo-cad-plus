@@ -1,6 +1,6 @@
 ﻿/*
   Copyright (C) 2012 Birunthan Mohanathas <http://poiru.net>
-                2015 RangerCD             <http://www.debug.moe>
+                2015 RangerCD             <http://www.rangercd.com>
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU Lesser General Public License as published
@@ -37,7 +37,7 @@ const GUID ORDER_SHUFFLE_DIRECTORIES = { 0x83C37600, 0xD725, 0x4727, { 0xB5, 0x3
 
 DECLARE_COMPONENT_VERSION(
 	"CD Art Display Plus",
-	"1.2.0",
+	"1.3.0",
 	"© 2013 - Birunthan Mohanathas, 2015 - RangerCD");
 
 static initquit_factory_t<foo_cad> foo_interface;

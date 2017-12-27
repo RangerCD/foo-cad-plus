@@ -1,6 +1,6 @@
 /*
   Copyright (C) 2012 Birunthan Mohanathas <http://poiru.net>
-                2015 RangerCD             <http://www.debug.moe>
+                2015 RangerCD             <http://www.rangercd.com>
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU Lesser General Public License as published

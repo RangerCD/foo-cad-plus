@@ -9,14 +9,21 @@ public:
 	PlusCover();
 	~PlusCover();
 
-	std::wstring m_TempPath;
-	std::wstring m_CoverPath;
+	unsigned long m_hCryptProv;
+
+	std::wstring m_wstrTempDir;
 
 	std::wstring GetCover(const std::wstring & FilePath);
 
 private:
-	unsigned int GenCover(const std::wstring & FilePath);
-	bool SearchCover(const std::wstring & FilePath);
+	bool SearchCacheFile(const std::wstring & CacheName, std::wstring & CoverPath);
+	bool GenCover(const std::wstring & FilePath, const std::wstring & CoverPath);
+	bool SearchCover(const std::wstring & FilePath, std::wstring & CoverPath);
+
+	bool GetCacheName(const std::wstring & FilePath, std::wstring & CacheName);
+
+	void CreateCrypt();
+	void ReleaseCrypt();
 };
 
 #endif
