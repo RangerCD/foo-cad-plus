@@ -12,11 +12,11 @@ public:
 	std::wstring m_TempPath;
 	std::wstring m_CoverPath;
 
-	std::wstring GetCover(std::wstring FilePath);
+	std::wstring GetCover(const std::wstring & FilePath);
 
 private:
-	unsigned int GenCover(std::wstring FilePath);
-	bool SearchCover(std::wstring FilePath);
+	unsigned int GenCover(const std::wstring & FilePath);
+	bool SearchCover(const std::wstring & FilePath);
 };
 
 #endif

@@ -18,7 +18,7 @@ PlusCover::~PlusCover()
 	DeleteFile(m_TempPath.c_str());
 }
 
-wstring PlusCover::GetCover(wstring FilePath)
+wstring PlusCover::GetCover(const wstring & FilePath)
 {
 	if (!GenCover(FilePath))
 		if (!SearchCover(FilePath))
@@ -26,7 +26,7 @@ wstring PlusCover::GetCover(wstring FilePath)
 	return m_CoverPath;
 }
 
-unsigned int PlusCover::GenCover(wstring FilePath)
+unsigned int PlusCover::GenCover(const wstring & FilePath)
 {
 	TagLib::FileRef fr(FilePath.c_str(), false);
 	if (!fr.isNull() && CCover::GetEmbedded(fr, m_TempPath))
@@ -41,7 +41,7 @@ unsigned int PlusCover::GenCover(wstring FilePath)
 	return 0;
 }
 
-bool PlusCover::SearchCover(wstring FilePath)
+bool PlusCover::SearchCover(const wstring & FilePath)
 {
 	wstring folder = FilePath.substr(0, FilePath.rfind(L"\\") + 1);
 	wstring parent_folder = folder + L"..\\";
