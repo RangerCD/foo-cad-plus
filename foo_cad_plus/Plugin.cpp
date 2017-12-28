@@ -37,7 +37,7 @@ const GUID ORDER_SHUFFLE_DIRECTORIES = { 0x83C37600, 0xD725, 0x4727, { 0xB5, 0x3
 
 DECLARE_COMPONENT_VERSION(
 	"CD Art Display Plus",
-	"1.3.1",
+	"1.3.2",
 	"© 2013 - Birunthan Mohanathas, 2015 - RangerCD");
 
 static initquit_factory_t<foo_cad> foo_interface;
