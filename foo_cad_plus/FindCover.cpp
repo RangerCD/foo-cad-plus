@@ -38,7 +38,9 @@ bool FindCover::GetEmbedded(const TagLib::FileRef & fr, std::wstring & target)
 		else
 			return true;
 
-		_wrename(OldPath.c_str(), target.c_str());
+		if (_wrename(OldPath.c_str(), target.c_str()))
+			target = OldPath;
+
 		return true;
 	}
 	return false;
