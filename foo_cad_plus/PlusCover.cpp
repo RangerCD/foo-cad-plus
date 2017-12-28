@@ -3,10 +3,15 @@
 
 #include <sstream>
 #include <iomanip>
+#include <map>
 #include <WinCrypt.h>
 #include <DbgHelp.h>
+#include <io.h>
 
 using namespace std;
+
+const unsigned int e_uiMaxCacheCount = 128;
+const unsigned int e_uiPurgeCacheCount = 1024;
 
 PlusCover::PlusCover()
 {
@@ -24,6 +29,7 @@ PlusCover::PlusCover()
 
 	MakeSureDirectoryPathExists(TempDir.c_str());
 
+	ClearCache();
 	CreateCrypt();
 }
 
@@ -122,6 +128,55 @@ bool PlusCover::GetCacheName(const std::wstring & FilePath, std::wstring & Cache
 	CryptDestroyHash(hHash);
 
 	return true;
+}
+
+void PlusCover::ClearCache(bool bClearAll)
+{
+	map<__time64_t, wstring> FileMap;
+	unsigned int Count = 0;
+	struct _wfinddata_t ff;
+
+	intptr_t hFF = _wfindfirst((m_wstrTempDir + L"*").c_str(), &ff);
+	do
+	{
+		if (wcscmp(ff.name, L".") && wcscmp(ff.name, L".."))
+		{
+			if (bClearAll)
+			{
+				_wremove((m_wstrTempDir + ff.name).c_str());
+			}
+			else
+			{
+				//Normally you won't get multiple files with same "time_write", 
+				//	which means "FileMap.size()" might be different from "Count" 
+				//	after traversal in rare cases.
+				//These files still have chance to be removed.
+				FileMap[ff.time_write] = ff.name;
+
+				++Count;
+
+				if (Count >= e_uiPurgeCacheCount)
+				{
+					//Purge, too many cache files, remove them all.
+					//Did you forget to close Foobar2000 and let it play all week long?
+					ClearCache(true);
+					_findclose(hFF);
+					return;
+				}
+			}
+		}
+	} while (_wfindnext(hFF, &ff) == 0);
+
+	//Get recorded count
+	Count = FileMap.size();
+
+	for (map<__time64_t, wstring>::iterator it = FileMap.begin(); Count > e_uiMaxCacheCount && it != FileMap.end(); ++it)
+	{
+		_wremove((m_wstrTempDir + it->second).c_str());
+		--Count;
+	}
+
+	_findclose(hFF);
 }
 
 void PlusCover::CreateCrypt()

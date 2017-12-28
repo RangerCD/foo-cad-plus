@@ -22,6 +22,8 @@ private:
 
 	bool GetCacheName(const std::wstring & FilePath, std::wstring & CacheName);
 
+	void ClearCache(bool bClearAll = false);
+
 	void CreateCrypt();
 	void ReleaseCrypt();
 };
